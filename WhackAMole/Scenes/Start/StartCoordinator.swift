@@ -16,12 +16,12 @@ final class StartCoordinator: BaseCoordinator {
     
     override func start() {
         let startViewController = StartViewController()
-        let startPresenter = StartPresenter(view: startViewController)
+        let startPresenter = StartPresenter(view: startViewController, coordinator: self)
         
-        startPresenter.coordinator = self
         startViewController.presenter = startPresenter
-        
-        navigationController.setViewControllers([startViewController], animated: true)
+        navigationController.navigationBar.isHidden = true
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        navigationController.setViewControllers([startViewController], animated: false)
     }
 }
 

@@ -7,14 +7,12 @@
 
 import Foundation
 
-protocol StartView: AnyObject {
-    
-}
+protocol StartView: AnyObject {}
 
 protocol StartViewPresenter: AnyObject {
     func didGoToGameScreen()
 }
 
-protocol StartCoordinatorProtocol: Coordinator {
+protocol StartCoordinatorProtocol: AnyObject {
     func showGameScene()
 }

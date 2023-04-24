@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		498E697F29F6F7DB008D5C81 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E697E29F6F7DB008D5C81 /* BaseViewController.swift */; };
 		49E1AB2F29F55B1D0057CCE0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */; };
 		49E1AB3129F55B8D0057CCE0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */; };
 		49E1AB3329F59AF30057CCE0 /* StartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB3229F59AF30057CCE0 /* StartCoordinator.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		498E697E29F6F7DB008D5C81 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		49E1AB3229F59AF30057CCE0 /* StartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoordinator.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				49EBABC129F557940028C802 /* BaseCoordinator.swift */,
+				498E697E29F6F7DB008D5C81 /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498E697F29F6F7DB008D5C81 /* BaseViewController.swift in Sources */,
 				49E1AB2F29F55B1D0057CCE0 /* AppCoordinator.swift in Sources */,
 				49E1AB3129F55B8D0057CCE0 /* StartViewController.swift in Sources */,
 				49EBABC229F557940028C802 /* BaseCoordinator.swift in Sources */,

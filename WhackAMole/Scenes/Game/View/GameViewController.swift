@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,6 @@ class GameViewController: UIViewController {
     }
     
     private func setupSuperView() {
-        view.backgroundColor = .systemIndigo
+        setBackgroundImage(named: "Frame 2")
     }
 }

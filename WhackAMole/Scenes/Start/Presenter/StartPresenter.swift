@@ -9,11 +9,12 @@ import Foundation
 
 
 final class StartPresenter {
-    weak var view: StartView?
-    weak var coordinator: StartCoordinatorProtocol?
+    private weak var view: StartView?
+    private weak var coordinator: StartCoordinatorProtocol?
     
-    required init(view: StartView) {
+    init(view: StartView, coordinator: StartCoordinatorProtocol) {
         self.view = view
+        self.coordinator = coordinator
     }
 }
 

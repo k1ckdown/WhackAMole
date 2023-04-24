@@ -8,12 +8,31 @@
 import UIKit
 import SnapKit
 
-final class StartViewController: UIViewController {
+final class StartViewController: BaseViewController {
     
-    var presenter: StartViewPresenter!
+    var presenter: StartViewPresenter?
     
-    private let backgroundImageView = UIImageView()
-    private let logoImageView = UIImageView()
+    private enum Constants {
+            enum HeaderImageView {
+                static let insetTop: CGFloat = 50
+                static let ratioWidth: CGFloat = 0.5
+            }
+        
+            enum MoleImageView {
+                static let insetTop: CGFloat = 120
+                static let size: CGFloat = 150
+            }
+            
+            enum StartButton {
+                static let insetTop: CGFloat = 90
+                static let size: CGFloat = 95
+                static let borderWidth: CGFloat = 4
+                static let cornerRadius: CGFloat = size / 2
+            }
+    }
+    
+    private let headerImageView = UIImageView()
+    private let moleImageView = UIImageView()
     private let startButton = UIButton(type: .system)
 
     override func viewDidLoad() {
@@ -24,38 +43,43 @@ final class StartViewController: UIViewController {
     
     @objc
     private func startButtonHandle() {
-        presenter.didGoToGameScreen()
+        presenter?.didGoToGameScreen()
     }
     
     private func setup() {
-        setupBackgroundImageView()
-        setupLogoImageView()
+        setupSuperView()
+        setupHeaderImageView()
+        setupMoleImageView()
         setupStartButton()
     }
     
-    private func setupBackgroundImageView() {
-        let image = UIImage(named: "back")
-        let backgroundImageView = UIImageView(image: image)
-        backgroundImageView.contentMode = .scaleAspectFill
+    private func setupSuperView() {
+        setBackgroundImage(named: "app-background")
+    }
+    
+    private func setupHeaderImageView() {
+        view.addSubview(headerImageView)
         
-        view.addSubview(backgroundImageView)
-        view.sendSubviewToBack(backgroundImageView)
+        let image = UIImage(named: "header-image")
+        headerImageView.image = image
+        headerImageView.contentMode = .scaleAspectFill
         
-        backgroundImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        headerImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.HeaderImageView.insetTop)
+            make.width.equalToSuperview().multipliedBy(Constants.HeaderImageView.ratioWidth)
+            make.centerX.equalToSuperview()
         }
     }
     
-    private func setupLogoImageView() {
-        view.addSubview(logoImageView)
+    private func setupMoleImageView() {
+        view.addSubview(moleImageView)
         
-        let image = UIImage(named: "logo")
-        logoImageView.image = image
-        logoImageView.contentMode = .scaleAspectFill
+        moleImageView.image = UIImage(named: "mole-appearing3")
+        moleImageView.contentMode = .scaleAspectFit
         
-        logoImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.width.equalToSuperview().multipliedBy(0.5)
+        moleImageView.snp.makeConstraints { make in
+            make.top.equalTo(headerImageView.snp.bottom).offset(Constants.MoleImageView.insetTop)
+            make.width.height.equalTo(Constants.MoleImageView.size)
             make.centerX.equalToSuperview()
         }
     }
@@ -65,23 +89,19 @@ final class StartViewController: UIViewController {
         
         startButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         startButton.imageView?.layer.transform = CATransform3DMakeScale(2, 2, 2)
-        startButton.tintColor = .white
-        startButton.backgroundColor = UIColor.startButton
-        startButton.layer.cornerRadius = 45
-        startButton.layer.borderWidth = 4
-        startButton.layer.borderColor = UIColor.white.cgColor
+        startButton.tintColor = .startButton
+        startButton.backgroundColor = UIColor.startButtonBackground
+        startButton.layer.cornerRadius = Constants.StartButton.cornerRadius
+        startButton.layer.borderWidth = Constants.StartButton.borderWidth
+        startButton.layer.borderColor = UIColor.startButton.cgColor
         startButton.addTarget(self, action: #selector(startButtonHandle), for: .touchUpInside)
         
         startButton.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(250)
-            make.height.equalTo(90)
-            make.width.equalTo(90)
+            make.top.equalTo(moleImageView.snp.bottom).offset(Constants.StartButton.insetTop)
+            make.height.width.equalTo(Constants.StartButton.size)
             make.centerX.equalToSuperview()
         }
     }
-
 }
 
-extension StartViewController: StartView {
-    
-}
+extension StartViewController: StartView {}
