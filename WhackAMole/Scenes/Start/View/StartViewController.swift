@@ -89,11 +89,11 @@ final class StartViewController: BaseViewController {
         
         startButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         startButton.imageView?.layer.transform = CATransform3DMakeScale(2, 2, 2)
-        startButton.tintColor = .startButton
+        startButton.tintColor = .appWhite
         startButton.backgroundColor = UIColor.startButtonBackground
         startButton.layer.cornerRadius = Constants.StartButton.cornerRadius
         startButton.layer.borderWidth = Constants.StartButton.borderWidth
-        startButton.layer.borderColor = UIColor.startButton.cgColor
+        startButton.layer.borderColor = UIColor.appWhite?.cgColor
         startButton.addTarget(self, action: #selector(startButtonHandle), for: .touchUpInside)
         
         startButton.snp.makeConstraints { make in

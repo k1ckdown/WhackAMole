@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    static let startButton = UIColor.white
+    static let appWhite = UIColor(named: "app-white")
     static let startButtonBackground = UIColor(named: "start-button")
 }
