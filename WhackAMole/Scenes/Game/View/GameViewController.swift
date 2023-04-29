@@ -9,6 +9,8 @@ import UIKit
 
 final class GameViewController: BaseViewController {
     
+    var presenter: GameViewPresenter?
+    
     private enum Constants {
             enum ScoreLabel {
                 static let height: CGFloat = 35
@@ -27,21 +29,40 @@ final class GameViewController: BaseViewController {
             }
     }
     
+    private let dataSource: GameViewDataSource
+    
     private let coinImageView = UIImageView()
     private let scoreLabel = UILabel()
     
     private let clockImageView = UIImageView()
     
+    private lazy var molesCollectionView: UICollectionView = {
+        let layout = MoleLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
+    }()
+    
+    init() {
+        dataSource = GameViewDataSource(presenter: presenter)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        dataSource.configure(for: molesCollectionView)
     }
     
     private func setup() {
         setupSuperView()
         setupScoreLabel()
         setupCoinImageView()
+        setupMolesCollectionView()
     }
     
     private func setupSuperView() {
@@ -81,6 +102,17 @@ final class GameViewController: BaseViewController {
             make.height.width.equalTo(Constants.CoinImageView.size)
             make.trailing.equalTo(scoreLabel.snp.leading).offset(Constants.CoinImageView.insetTrailing)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.CoinImageView.insetTop)
+        }
+    }
+    
+    private func setupMolesCollectionView() {
+        view.addSubview(molesCollectionView)
+        
+        molesCollectionView.backgroundColor = .clear
+        molesCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(coinImageView.snp.bottom).offset(60)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }
