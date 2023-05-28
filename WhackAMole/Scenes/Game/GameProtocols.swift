@@ -8,6 +8,7 @@
 import Foundation
 
 protocol GameView: AnyObject {
+    func didUpdateScoreTitle(_ title: String)
     func didUpdateCollectionItems(at items: [IndexPath])
 }
 

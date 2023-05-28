@@ -83,7 +83,7 @@ final class GameViewController: BaseViewController {
     private func setupScoreLabel() {
         view.addSubview(scoreLabel)
         
-        scoreLabel.text = "25"
+        scoreLabel.text = "0"
         scoreLabel.textColor = .black
         scoreLabel.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         scoreLabel.textAlignment = .center
@@ -130,6 +130,10 @@ final class GameViewController: BaseViewController {
 }
 
 extension GameViewController: GameView {
+    func didUpdateScoreTitle(_ title: String) {
+        scoreLabel.text = title
+    }
+    
     func didUpdateCollectionItems(at items: [IndexPath]) {
         UIView.performWithoutAnimation {
             molesCollectionView.reloadItems(at: items)
