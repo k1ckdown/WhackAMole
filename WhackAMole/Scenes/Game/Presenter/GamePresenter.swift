@@ -18,14 +18,19 @@ final class GamePresenter {
     
     init(view: GameView) {
         self.view = view
-        
-        for _ in 1...numberOfMoles {
-            moles.append(Mole(hitCount: 0, hitsToKillCount: 3, state: .disappearing))
-        }
+        addMoles()
     }
     
     private func startGame() {
         createGameTimer()
+    }
+    
+    private func addMoles() {
+        for _ in 1...numberOfMoles {
+            moles.append(Mole(hitCount: 0,
+                              hitsToKillCount: 3,
+                              state: .disappearing))
+        }
     }
     
     private func createGameTimer() {
@@ -95,11 +100,13 @@ extension GamePresenter: GameViewPresenter {
             if (moles[item].hitCount == moles[item].hitsToKillCount) {
                 score += 3
                 moles[item].state = .hurt(type: type)
+                
                 view?.didUpdateScoreTitle("\(score)")
                 view?.didUpdateCollectionItems(at: [IndexPath(item: item, section: 0)])
             } else {
                 score += 1
                 moles[item].state = .hit
+                
                 view?.didUpdateScoreTitle("\(score)")
                 view?.didUpdateCollectionItems(at: [IndexPath(item: item, section: 0)])
 

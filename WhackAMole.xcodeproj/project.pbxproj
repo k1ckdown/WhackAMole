@@ -14,6 +14,7 @@
 		49387BC229FD9D2A00A3EFB1 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */; };
 		49387BC429FDA1A400A3EFB1 /* MoleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */; };
 		498E697F29F6F7DB008D5C81 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E697E29F6F7DB008D5C81 /* BaseViewController.swift */; };
+		49A9AA8A2A23E91900F062E5 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A9AA892A23E91900F062E5 /* UIFont+AppFonts.swift */; };
 		49D8A28729FE3DFA00DF5B8E /* Mole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D8A28629FE3DFA00DF5B8E /* Mole.swift */; };
 		49E1AB2F29F55B1D0057CCE0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */; };
 		49E1AB3129F55B8D0057CCE0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */; };
@@ -40,6 +41,7 @@
 		49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
 		49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleLayout.swift; sourceTree = "<group>"; };
 		498E697E29F6F7DB008D5C81 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		49A9AA892A23E91900F062E5 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		49D8A28629FE3DFA00DF5B8E /* Mole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mole.swift; sourceTree = "<group>"; };
 		49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				49E1AB3A29F5A8100057CCE0 /* UIColor+AppColors.swift */,
+				49A9AA892A23E91900F062E5 /* UIFont+AppFonts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				49EBABC029F5565A0028C802 /* Coordinator.swift in Sources */,
 				49387BB629FD873800A3EFB1 /* MoleCollectionViewCell.swift in Sources */,
 				49387BBB29FD9C2000A3EFB1 /* MoleState.swift in Sources */,
+				49A9AA8A2A23E91900F062E5 /* UIFont+AppFonts.swift in Sources */,
 				49E1AB3B29F5A8100057CCE0 /* UIColor+AppColors.swift in Sources */,
 				49EBABA829F5268C0028C802 /* AppDelegate.swift in Sources */,
 				49E1AB4529F5B44D0057CCE0 /* GameViewController.swift in Sources */,

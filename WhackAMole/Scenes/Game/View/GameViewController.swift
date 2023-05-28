@@ -33,6 +33,10 @@ final class GameViewController: BaseViewController {
                 static let cornerRadius: CGFloat = size / 2
             }
         
+            enum MolesCollectionView {
+                static let insetTop: CGFloat = 60
+            }
+        
     }
     
     private let dataSource: GameViewDataSource
@@ -84,8 +88,8 @@ final class GameViewController: BaseViewController {
         view.addSubview(scoreLabel)
         
         scoreLabel.text = "0"
+        scoreLabel.font = .scoreTitle
         scoreLabel.textColor = .black
-        scoreLabel.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         scoreLabel.textAlignment = .center
         scoreLabel.layer.cornerRadius = Constants.ScoreLabel.cornerRadius
         scoreLabel.clipsToBounds = true
@@ -122,7 +126,7 @@ final class GameViewController: BaseViewController {
         molesCollectionView.backgroundColor = .clear
         
         molesCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(coinImageView.snp.bottom).offset(60)
+            make.top.equalTo(coinImageView.snp.bottom).offset(Constants.MolesCollectionView.insetTop)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
         }
