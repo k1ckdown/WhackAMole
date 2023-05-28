@@ -9,9 +9,14 @@ import UIKit
 
 final class GameViewController: BaseViewController {
     
-    var presenter: GameViewPresenter?
+    var presenter: GameViewPresenter? {
+        didSet {
+            dataSource.presenter = presenter
+        }
+    }
     
     private enum Constants {
+        
             enum ScoreLabel {
                 static let height: CGFloat = 35
                 static let width: CGFloat = 120
@@ -27,6 +32,7 @@ final class GameViewController: BaseViewController {
                 static let borderWidth: CGFloat = 4
                 static let cornerRadius: CGFloat = size / 2
             }
+        
     }
     
     private let dataSource: GameViewDataSource
@@ -43,7 +49,7 @@ final class GameViewController: BaseViewController {
     }()
     
     init() {
-        dataSource = GameViewDataSource(presenter: presenter)
+        dataSource = GameViewDataSource()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,7 +61,12 @@ final class GameViewController: BaseViewController {
         super.viewDidLoad()
 
         setup()
-        dataSource.configure(for: molesCollectionView)
+        dataSource.configure(with: molesCollectionView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.viewDidAppear()
     }
     
     private func setup() {
@@ -66,7 +77,7 @@ final class GameViewController: BaseViewController {
     }
     
     private func setupSuperView() {
-        setBackgroundImage(named: "Frame 2")
+        setBackgroundImage(named: "game-background")
     }
     
     private func setupScoreLabel() {
@@ -109,10 +120,19 @@ final class GameViewController: BaseViewController {
         view.addSubview(molesCollectionView)
         
         molesCollectionView.backgroundColor = .clear
+        
         molesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(coinImageView.snp.bottom).offset(60)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+    }
+}
+
+extension GameViewController: GameView {
+    func didUpdateCollectionItems(at items: [IndexPath]) {
+        UIView.performWithoutAnimation {
+            molesCollectionView.reloadItems(at: items)
         }
     }
 }

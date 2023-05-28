@@ -20,6 +20,9 @@ final class AppCoordinator: BaseCoordinator {
     override func start() {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
+        
+        navigationController.navigationBar.isHidden = true
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
         showStartScene()
     }
 }

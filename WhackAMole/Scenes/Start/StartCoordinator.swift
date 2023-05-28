@@ -5,7 +5,6 @@
 //  Created by Ivan Semenov on 23.04.2023.
 //
 
-import Foundation
 import UIKit
 
 final class StartCoordinator: BaseCoordinator {
@@ -17,10 +16,8 @@ final class StartCoordinator: BaseCoordinator {
     override func start() {
         let startViewController = StartViewController()
         let startPresenter = StartPresenter(view: startViewController, coordinator: self)
-        
         startViewController.presenter = startPresenter
-        navigationController.navigationBar.isHidden = true
-        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        
         navigationController.setViewControllers([startViewController], animated: false)
     }
 }
@@ -31,4 +28,5 @@ extension StartCoordinator: StartCoordinatorProtocol {
         coordinate(to: gameCoordinator)
     }
 }
+
 

@@ -8,9 +8,12 @@
 import Foundation
 
 protocol GameView: AnyObject {
-    
+    func didUpdateCollectionItems(at items: [IndexPath])
 }
 
 protocol GameViewPresenter: AnyObject {
-    func viewDidLoad()
+    func viewDidAppear()
+    func getMoleCount() -> Int
+    func didTapOnMole(at item: Int)
+    func getMoleImageName(for indexPath: IndexPath) -> String
 }

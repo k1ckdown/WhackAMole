@@ -11,7 +11,6 @@ import UIKit
 class BaseCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
-    var rootCoordinator: Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -23,7 +22,6 @@ class BaseCoordinator: Coordinator {
     
     func coordinate(to coordinator: Coordinator) {
         childCoordinators.append(coordinator)
-        coordinator.rootCoordinator = self
         coordinator.start()
     }
     

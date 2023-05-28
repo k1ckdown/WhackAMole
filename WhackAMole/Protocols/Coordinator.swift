@@ -10,7 +10,6 @@ import UIKit
 
 protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get }
-    var rootCoordinator: Coordinator? { get set }
     
     func start()
     func coordinate(to coordintor: Coordinator)

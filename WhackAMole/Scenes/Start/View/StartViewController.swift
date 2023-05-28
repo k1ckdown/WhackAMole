@@ -13,14 +13,15 @@ final class StartViewController: BaseViewController {
     var presenter: StartViewPresenter?
     
     private enum Constants {
+        
             enum HeaderImageView {
                 static let insetTop: CGFloat = 50
-                static let ratioWidth: CGFloat = 0.5
+                static let multiplierWidth: CGFloat = 0.5
             }
         
             enum MoleImageView {
-                static let insetTop: CGFloat = 120
                 static let size: CGFloat = 150
+                static let insetTop: CGFloat = 120
             }
             
             enum StartButton {
@@ -29,6 +30,7 @@ final class StartViewController: BaseViewController {
                 static let borderWidth: CGFloat = 4
                 static let cornerRadius: CGFloat = size / 2
             }
+        
     }
     
     private let headerImageView = UIImageView()
@@ -54,19 +56,18 @@ final class StartViewController: BaseViewController {
     }
     
     private func setupSuperView() {
-        setBackgroundImage(named: "app-background")
+        setBackgroundImage(named: "start-background")
     }
     
     private func setupHeaderImageView() {
         view.addSubview(headerImageView)
         
-        let image = UIImage(named: "header-image")
-        headerImageView.image = image
+        headerImageView.image = UIImage(named: "header-image")
         headerImageView.contentMode = .scaleAspectFill
         
         headerImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.HeaderImageView.insetTop)
-            make.width.equalToSuperview().multipliedBy(Constants.HeaderImageView.ratioWidth)
+            make.width.equalToSuperview().multipliedBy(Constants.HeaderImageView.multiplierWidth)
             make.centerX.equalToSuperview()
         }
     }
@@ -87,9 +88,9 @@ final class StartViewController: BaseViewController {
     private func setupStartButton() {
         view.addSubview(startButton)
         
+        startButton.tintColor = .appWhite
         startButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         startButton.imageView?.layer.transform = CATransform3DMakeScale(2, 2, 2)
-        startButton.tintColor = .appWhite
         startButton.backgroundColor = UIColor.startButtonBackground
         startButton.layer.cornerRadius = Constants.StartButton.cornerRadius
         startButton.layer.borderWidth = Constants.StartButton.borderWidth
@@ -104,4 +105,4 @@ final class StartViewController: BaseViewController {
     }
 }
 
-extension StartViewController: StartView {}
+extension StartViewController: StartView { }

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Status=Hurt1.png",
+      "filename" : "Status=Hurt2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Status=Hurt2 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Status=Hurt2 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

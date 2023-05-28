@@ -7,9 +7,8 @@
 
 import Foundation
 
-enum MoleState {
-    case hit
-    case hurt
-    case appearing
-    case disappearing
+struct Mole {
+    var hitCount: Int
+    let hitsToKillCount: Int
+    var state: MoleState
 }

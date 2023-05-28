@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		49387BB629FD873800A3EFB1 /* MoleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BB529FD873800A3EFB1 /* MoleCollectionViewCell.swift */; };
-		49387BBB29FD9C2000A3EFB1 /* Mole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BBA29FD9C2000A3EFB1 /* Mole.swift */; };
+		49387BBB29FD9C2000A3EFB1 /* MoleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BBA29FD9C2000A3EFB1 /* MoleState.swift */; };
 		49387BBD29FD9CBB00A3EFB1 /* GameViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BBC29FD9CBB00A3EFB1 /* GameViewDataSource.swift */; };
 		49387BBF29FD9CE100A3EFB1 /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BBE29FD9CE100A3EFB1 /* GamePresenter.swift */; };
 		49387BC229FD9D2A00A3EFB1 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */; };
 		49387BC429FDA1A400A3EFB1 /* MoleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */; };
 		498E697F29F6F7DB008D5C81 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E697E29F6F7DB008D5C81 /* BaseViewController.swift */; };
+		49D8A28729FE3DFA00DF5B8E /* Mole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D8A28629FE3DFA00DF5B8E /* Mole.swift */; };
 		49E1AB2F29F55B1D0057CCE0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */; };
 		49E1AB3129F55B8D0057CCE0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */; };
 		49E1AB3329F59AF30057CCE0 /* StartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1AB3229F59AF30057CCE0 /* StartCoordinator.swift */; };
@@ -33,12 +34,13 @@
 
 /* Begin PBXFileReference section */
 		49387BB529FD873800A3EFB1 /* MoleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleCollectionViewCell.swift; sourceTree = "<group>"; };
-		49387BBA29FD9C2000A3EFB1 /* Mole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mole.swift; sourceTree = "<group>"; };
+		49387BBA29FD9C2000A3EFB1 /* MoleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleState.swift; sourceTree = "<group>"; };
 		49387BBC29FD9CBB00A3EFB1 /* GameViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewDataSource.swift; sourceTree = "<group>"; };
 		49387BBE29FD9CE100A3EFB1 /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
 		49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
 		49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleLayout.swift; sourceTree = "<group>"; };
 		498E697E29F6F7DB008D5C81 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		49D8A28629FE3DFA00DF5B8E /* Mole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mole.swift; sourceTree = "<group>"; };
 		49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		49E1AB3229F59AF30057CCE0 /* StartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoordinator.swift; sourceTree = "<group>"; };
@@ -69,27 +71,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		49387BB229FD865F00A3EFB1 /* ViewComponents */ = {
+		49387BB229FD865F00A3EFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				49387BB429FD86F100A3EFB1 /* MoleCollectionCell */,
-			);
-			path = ViewComponents;
-			sourceTree = "<group>";
-		};
-		49387BB429FD86F100A3EFB1 /* MoleCollectionCell */ = {
-			isa = PBXGroup;
-			children = (
-				49387BB529FD873800A3EFB1 /* MoleCollectionViewCell.swift */,
 				49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */,
+				49387BB529FD873800A3EFB1 /* MoleCollectionViewCell.swift */,
 			);
-			path = MoleCollectionCell;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		49387BB929FD9C1200A3EFB1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				49387BBA29FD9C2000A3EFB1 /* Mole.swift */,
+				49387BBA29FD9C2000A3EFB1 /* MoleState.swift */,
+				49D8A28629FE3DFA00DF5B8E /* Mole.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -176,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				49387BB929FD9C1200A3EFB1 /* Models */,
-				49387BB229FD865F00A3EFB1 /* ViewComponents */,
+				49387BB229FD865F00A3EFB1 /* Views */,
 				49E1AB3929F5A7FE0057CCE0 /* Extensions */,
 				49E1AB2D29F55A880057CCE0 /* Scenes */,
 				49EBABBE29F5564C0028C802 /* Protocols */,
@@ -312,11 +307,12 @@
 				49EBABC229F557940028C802 /* BaseCoordinator.swift in Sources */,
 				49E1AB3329F59AF30057CCE0 /* StartCoordinator.swift in Sources */,
 				49E1AB4229F5B2350057CCE0 /* StartProtocols.swift in Sources */,
+				49D8A28729FE3DFA00DF5B8E /* Mole.swift in Sources */,
 				49E1AB4029F5B1130057CCE0 /* StartPresenter.swift in Sources */,
 				49E1AB4929F5B4760057CCE0 /* GameCoordinator.swift in Sources */,
 				49EBABC029F5565A0028C802 /* Coordinator.swift in Sources */,
 				49387BB629FD873800A3EFB1 /* MoleCollectionViewCell.swift in Sources */,
-				49387BBB29FD9C2000A3EFB1 /* Mole.swift in Sources */,
+				49387BBB29FD9C2000A3EFB1 /* MoleState.swift in Sources */,
 				49E1AB3B29F5A8100057CCE0 /* UIColor+AppColors.swift in Sources */,
 				49EBABA829F5268C0028C802 /* AppDelegate.swift in Sources */,
 				49E1AB4529F5B44D0057CCE0 /* GameViewController.swift in Sources */,

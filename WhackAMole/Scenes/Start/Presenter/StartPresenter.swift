@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 final class StartPresenter {
     private weak var view: StartView?
     private weak var coordinator: StartCoordinatorProtocol?

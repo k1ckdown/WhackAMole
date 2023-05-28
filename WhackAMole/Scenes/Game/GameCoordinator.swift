@@ -5,7 +5,6 @@
 //  Created by Ivan Semenov on 24.04.2023.
 //
 
-import Foundation
 import UIKit
 
 final class GameCoordinator: BaseCoordinator {
@@ -16,6 +15,9 @@ final class GameCoordinator: BaseCoordinator {
     
     override func start() {
         let gameViewController = GameViewController()
+        let gamePresenter = GamePresenter(view: gameViewController)
+        gameViewController.presenter = gamePresenter
+        
         navigationController.pushViewController(gameViewController, animated: true)
     }
 }

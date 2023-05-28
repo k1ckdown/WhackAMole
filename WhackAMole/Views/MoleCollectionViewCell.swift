@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MoleCollectionViewCell: UICollectionViewCell {
+final class MoleCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "MoleCollectionViewCell"
     
-     let moleImageView = UIImageView()
+    private let moleImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,12 +22,14 @@ class MoleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateImageView(to imageName: String) {
+        moleImageView.image = UIImage(named: imageName)
+    }
+    
     private func setup() {
         addSubview(moleImageView)
         
-        moleImageView.image = UIImage(named: "Default")
         moleImageView.contentMode = .scaleAspectFit
-        
         moleImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
