@@ -1,5 +1,5 @@
 //
-//  MoleCollectionViewCell.swift
+//  MoleViewCell.swift
 //  WhackAMole
 //
 //  Created by Ivan Semenov on 30.04.2023.
@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class MoleCollectionViewCell: UICollectionViewCell {
-    
-    static let identifier = "MoleCollectionViewCell"
+final class MoleViewCell: UICollectionViewCell, ReuseIdentifier {
     
     private let moleImageView = UIImageView()
     
@@ -22,10 +20,6 @@ final class MoleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateImageView(to imageName: String) {
-        moleImageView.image = UIImage(named: imageName)
-    }
-    
     private func setup() {
         addSubview(moleImageView)
         
@@ -34,4 +28,12 @@ final class MoleCollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
     }
+    
 }
+
+extension MoleViewCell: MoleView {
+    func updateImageView(to imageName: String) {
+        moleImageView.image = UIImage(named: imageName)
+    }
+}
+

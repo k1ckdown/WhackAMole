@@ -127,18 +127,17 @@ final class GameViewController: BaseViewController {
         
         molesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(coinImageView.snp.bottom).offset(Constants.MolesCollectionView.insetTop)
-            make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
 
 extension GameViewController: GameView {
-    func didUpdateScoreTitle(_ title: String) {
+    func updateScoreTitle(_ title: String) {
         scoreLabel.text = title
     }
     
-    func didUpdateCollectionItems(at items: [IndexPath]) {
+    func refreshCollectionItems(at items: [IndexPath]) {
         UIView.performWithoutAnimation {
             molesCollectionView.reloadItems(at: items)
         }

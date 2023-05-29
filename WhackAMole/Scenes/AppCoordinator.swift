@@ -5,7 +5,6 @@
 //  Created by Ivan Semenov on 23.04.2023.
 //
 
-import Foundation
 import UIKit
 
 final class AppCoordinator: BaseCoordinator {

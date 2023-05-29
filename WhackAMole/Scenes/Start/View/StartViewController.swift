@@ -75,7 +75,7 @@ final class StartViewController: BaseViewController {
     private func setupMoleImageView() {
         view.addSubview(moleImageView)
         
-        moleImageView.image = UIImage(named: "mole-appearing3")
+        moleImageView.image = UIImage(named: "appearing-large")
         moleImageView.contentMode = .scaleAspectFit
         
         moleImageView.snp.makeConstraints { make in

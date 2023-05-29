@@ -9,15 +9,19 @@ import Foundation
 
 final class GamePresenter {
     
+    var numberOfMoles: Int {
+        game.numberOfMoles
+    }
+    
     private weak var view: GameView?
-
+    private var moles: [Mole]
+    private let game: Game
     private var gameTimer: Timer?
-    private var score = 0
-    private(set) var numberOfMoles = 12
-    private var moles = [Mole]()
     
     init(view: GameView) {
         self.view = view
+        game = .init()
+        moles = .init()
         addMoles()
     }
     
@@ -28,7 +32,7 @@ final class GamePresenter {
     private func addMoles() {
         for _ in 1...numberOfMoles {
             moles.append(Mole(hitCount: 0,
-                              hitsToKillCount: 3,
+                              hitsToKillCount: game.hitsToKillCount,
                               state: .disappearing))
         }
     }
@@ -50,7 +54,7 @@ final class GamePresenter {
                 availableIndexesMole.append(index)
             }
         }
-            
+        
         return availableIndexesMole.randomElement()
     }
     
@@ -60,7 +64,7 @@ final class GamePresenter {
         guard let indexMole = getRandomAvailableIndexMole() else { return }
         
         moles[indexMole].state = .appearing(type: stateType)
-        view?.didUpdateCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
+        view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
         
         Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
             self.applyMoleHideState(at: indexMole)
@@ -71,7 +75,7 @@ final class GamePresenter {
         switch moles[indexMole].state {
         case .appearing(type: _):
             self.moles[indexMole].state = .disappearing
-            self.view?.didUpdateCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
+            self.view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
         default: return
         }
     }
@@ -79,17 +83,12 @@ final class GamePresenter {
 }
 
 extension GamePresenter: GameViewPresenter {
-    
     func viewDidAppear() {
         startGame()
     }
     
-    func getMoleImageName(for indexPath: IndexPath) -> String {
-        moles[indexPath.item].state.description
-    }
-    
-    func getMoleCount() -> Int {
-        moles.count
+    func configure(cell: MoleView, forItem item: Int) {
+        cell.updateImageView(to: moles[item].state.description)
     }
     
     func didTapOnMole(at item: Int) {
@@ -98,21 +97,27 @@ extension GamePresenter: GameViewPresenter {
             moles[item].hitCount += 1
             
             if (moles[item].hitCount == moles[item].hitsToKillCount) {
-                score += 3
+                game.incrementScoreForKill()
                 moles[item].state = .hurt(type: type)
                 
-                view?.didUpdateScoreTitle("\(score)")
-                view?.didUpdateCollectionItems(at: [IndexPath(item: item, section: 0)])
+                view?.updateScoreTitle("\(game.score)")
+                view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
+                
+                if game.isMaxScore {
+                    gameTimer?.invalidate()
+                    print("The end")
+                }
+                
             } else {
-                score += 1
+                game.incrementScoreForHit()
                 moles[item].state = .hit
                 
-                view?.didUpdateScoreTitle("\(score)")
-                view?.didUpdateCollectionItems(at: [IndexPath(item: item, section: 0)])
+                view?.updateScoreTitle("\(game.score)")
+                view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
 
                 Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
                     self.moles[item].state = .disappearing
-                    self.view?.didUpdateCollectionItems(at: [IndexPath(item: item, section: 0)])
+                    self.view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
                 }
             }
             

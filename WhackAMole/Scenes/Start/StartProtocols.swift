@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol StartView: AnyObject {}
+protocol StartView: AnyObject {
+    
+}
 
 protocol StartViewPresenter: AnyObject {
     func didGoToGameScreen()
