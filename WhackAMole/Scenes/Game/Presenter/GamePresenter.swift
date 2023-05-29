@@ -32,7 +32,6 @@ final class GamePresenter {
     private func addMoles() {
         for _ in 1...numberOfMoles {
             moles.append(Mole(hitCount: 0,
-                              hitsToKillCount: game.hitsToKillCount,
                               state: .disappearing))
         }
     }
@@ -67,16 +66,42 @@ final class GamePresenter {
         view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
         
         Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
-            self.applyMoleHideState(at: indexMole)
+            self.applyMoleDisappearingState(at: indexMole)
         }
     }
     
-    private func applyMoleHideState(at indexMole: Int) {
+    private func applyMoleDisappearingState(at indexMole: Int) {
         switch moles[indexMole].state {
         case .appearing(type: _):
             self.moles[indexMole].state = .disappearing
             self.view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
         default: return
+        }
+    }
+    
+    private func hurtMole(item: Int, stateType: StateType) {
+        game.incrementScoreForKill()
+        moles[item].state = .hurt(type: stateType)
+        
+        view?.updateScoreTitle("\(game.score)")
+        view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
+        
+        if game.isMaxScore {
+            gameTimer?.invalidate()
+            print("The end")
+        }
+    }
+    
+    private func hitMole(item: Int) {
+        game.incrementScoreForHit()
+        moles[item].state = .hit
+        
+        view?.updateScoreTitle("\(game.score)")
+        view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
+
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+            self.moles[item].state = .disappearing
+            self.view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
         }
     }
     
@@ -96,29 +121,10 @@ extension GamePresenter: GameViewPresenter {
         case .appearing(type: let type):
             moles[item].hitCount += 1
             
-            if (moles[item].hitCount == moles[item].hitsToKillCount) {
-                game.incrementScoreForKill()
-                moles[item].state = .hurt(type: type)
-                
-                view?.updateScoreTitle("\(game.score)")
-                view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
-                
-                if game.isMaxScore {
-                    gameTimer?.invalidate()
-                    print("The end")
-                }
-                
+            if (moles[item].hitCount == game.hitsToKillCount) {
+                hurtMole(item: item, stateType: type)
             } else {
-                game.incrementScoreForHit()
-                moles[item].state = .hit
-                
-                view?.updateScoreTitle("\(game.score)")
-                view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
-
-                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                    self.moles[item].state = .disappearing
-                    self.view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
-                }
+                hitMole(item: item)
             }
             
         default: return

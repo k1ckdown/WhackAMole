@@ -105,4 +105,6 @@ final class StartViewController: BaseViewController {
     }
 }
 
-extension StartViewController: StartView { }
+extension StartViewController: StartView {
+    
+}

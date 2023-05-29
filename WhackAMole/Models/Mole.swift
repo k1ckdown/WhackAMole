@@ -9,6 +9,5 @@ import Foundation
 
 struct Mole {
     var hitCount: Int
-    let hitsToKillCount: Int
     var state: MoleState
 }
