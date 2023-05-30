@@ -14,8 +14,9 @@ protocol GameView: AnyObject {
 
 protocol GameViewPresenter: AnyObject {
     var numberOfMoles: Int { get }
+    var gameProgress: Progress { get }
     
-    func viewDidAppear()
+    func viewWillAppear()
     func didTapOnMole(at item: Int)
     func configure(cell: MoleView, forItem item: Int)
 }

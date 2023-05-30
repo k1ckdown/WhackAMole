@@ -13,15 +13,24 @@ final class GamePresenter {
         game.numberOfMoles
     }
     
+    let gameProgress: Progress
+    
     private weak var view: GameView?
+    
     private var moles: [Mole]
     private let game: Game
+    private var isEndGame = false
     private var gameTimer: Timer?
     
     init(view: GameView) {
         self.view = view
+        
         game = .init()
         moles = .init()
+        
+        gameProgress = .init(totalUnitCount: game.playingTime)
+        gameProgress.completedUnitCount = game.playingTime
+        
         addMoles()
     }
     
@@ -39,11 +48,30 @@ final class GamePresenter {
     private func createGameTimer() {
         guard gameTimer == nil else { return }
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 3,
+        gameTimer = Timer.scheduledTimer(timeInterval: 1,
                                          target: self,
-                                         selector: #selector(applyMoleAppearingState),
+                                         selector: #selector(play),
                                          userInfo: nil,
                                          repeats: true)
+    }
+    
+    @objc
+    private func play() {
+        gameProgress.completedUnitCount -= 1
+        
+        if gameProgress.fractionCompleted == 0 {
+            finishGame()
+        }
+        
+        if gameProgress.completedUnitCount % 2 == 0 {
+            applyMoleAppearingState()
+        }
+    }
+    
+    private func finishGame() {
+        gameTimer?.invalidate()
+        isEndGame = true
+        print("The end")
     }
     
     private func getRandomAvailableIndexMole() -> Int? {
@@ -57,8 +85,8 @@ final class GamePresenter {
         return availableIndexesMole.randomElement()
     }
     
-    @objc
     private func applyMoleAppearingState() {
+        guard isEndGame == false else { return }
         guard let stateType = StateType.allCases.randomElement() else { return }
         guard let indexMole = getRandomAvailableIndexMole() else { return }
         
@@ -87,8 +115,7 @@ final class GamePresenter {
         view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
         
         if game.isMaxScore {
-            gameTimer?.invalidate()
-            print("The end")
+            finishGame()
         }
     }
     
@@ -108,7 +135,7 @@ final class GamePresenter {
 }
 
 extension GamePresenter: GameViewPresenter {
-    func viewDidAppear() {
+    func viewWillAppear() {
         startGame()
     }
     

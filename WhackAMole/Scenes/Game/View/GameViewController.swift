@@ -21,7 +21,7 @@ final class GameViewController: BaseViewController {
                 static let height: CGFloat = 35
                 static let width: CGFloat = 120
                 static let insetTop: CGFloat = 30
-                static let insetLeading: CGFloat = 60
+                static let insetLeading: CGFloat = 55
                 static let cornerRadius: CGFloat = 10
             }
         
@@ -33,16 +33,39 @@ final class GameViewController: BaseViewController {
                 static let cornerRadius: CGFloat = size / 2
             }
         
+            enum TimerProgressWrapperView {
+                static let height: CGFloat = 35
+                static let width: CGFloat = 120
+                static let insetTop: CGFloat = 30
+                static let insetTrailing: CGFloat = 15
+                static let cornerRadius: CGFloat = 7
+            }
+        
+            enum TimerProgressView {
+                static let inset: CGFloat = 6
+            }
+        
+            enum TimerImageView {
+                static let size: CGFloat = 50
+                static let insetTop: CGFloat = 20
+                static let insetTrailing: CGFloat = 12
+                static let cornerRadius: CGFloat = size / 2
+            }
+        
             enum MolesCollectionView {
-                static let insetTop: CGFloat = 60
+                static let insetTop: CGFloat = 30
             }
         
     }
     
     private let dataSource: GameViewDataSource
     
-    private let coinImageView = UIImageView()
     private let scoreLabel = UILabel()
+    private let coinImageView = UIImageView()
+    
+    private let timerImageView = UIImageView()
+    private let timerProgressView = UIProgressView()
+    private let timerProgressWrapperView = UIView()
     
     private let clockImageView = UIImageView()
     
@@ -68,15 +91,18 @@ final class GameViewController: BaseViewController {
         dataSource.configure(with: molesCollectionView)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter?.viewDidAppear()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
     }
     
     private func setup() {
         setupSuperView()
         setupScoreLabel()
         setupCoinImageView()
+        setupTimerProgressWrapperView()
+        setupTimerProgressView()
+        setupTimerImageView()
         setupMolesCollectionView()
     }
     
@@ -89,12 +115,11 @@ final class GameViewController: BaseViewController {
         
         scoreLabel.text = "0"
         scoreLabel.font = .scoreTitle
-        scoreLabel.textColor = .black
+        scoreLabel.textColor = .appBlack
         scoreLabel.textAlignment = .center
-        scoreLabel.layer.cornerRadius = Constants.ScoreLabel.cornerRadius
+        scoreLabel.backgroundColor = .appWhite
         scoreLabel.clipsToBounds = true
-        scoreLabel.backgroundColor = .white
-        scoreLabel.adjustsFontSizeToFitWidth = true
+        scoreLabel.layer.cornerRadius = Constants.ScoreLabel.cornerRadius
         
         scoreLabel.snp.makeConstraints { make in
             make.width.equalTo(Constants.ScoreLabel.width)
@@ -117,6 +142,48 @@ final class GameViewController: BaseViewController {
             make.height.width.equalTo(Constants.CoinImageView.size)
             make.trailing.equalTo(scoreLabel.snp.leading).offset(Constants.CoinImageView.insetTrailing)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.CoinImageView.insetTop)
+        }
+    }
+    
+    private func setupTimerProgressWrapperView() {
+        view.addSubview(timerProgressWrapperView)
+        
+        timerProgressWrapperView.backgroundColor = .appWhite
+        timerProgressWrapperView.clipsToBounds = true
+        timerProgressWrapperView.layer.cornerRadius = Constants.TimerProgressWrapperView.cornerRadius
+        
+        timerProgressWrapperView.snp.makeConstraints { make in
+            make.width.equalTo(Constants.TimerProgressWrapperView.width)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.TimerProgressWrapperView.insetTop)
+            make.height.equalTo(Constants.TimerProgressWrapperView.height)
+            make.trailing.equalToSuperview().inset(Constants.TimerProgressWrapperView.insetTrailing)
+        }
+    }
+    
+    private func setupTimerProgressView() {
+        timerProgressWrapperView.addSubview(timerProgressView)
+        
+        timerProgressView.trackTintColor = .timerTrack
+        timerProgressView.progressTintColor = .timerProgress
+        timerProgressView.observedProgress = presenter?.gameProgress
+        
+        timerProgressView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(Constants.TimerProgressView.inset)
+        }
+    }
+    
+    private func setupTimerImageView() {
+        view.addSubview(timerImageView)
+        
+        timerImageView.image = UIImage(named: "clock")
+        timerImageView.contentMode = .scaleAspectFill
+        timerImageView.backgroundColor = .appWhite
+        timerImageView.layer.cornerRadius = Constants.TimerImageView.cornerRadius
+        
+        timerImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(Constants.TimerImageView.size)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.TimerImageView.insetTop)
+            make.trailing.equalTo(timerProgressWrapperView.snp.leading).offset(Constants.TimerImageView.insetTrailing)
         }
     }
     

@@ -11,7 +11,8 @@ final class Game {
     
     private(set) var score = 0
     private(set) var numberOfMoles = 12
-    private(set) var hitsToKillCount = 3
+    private(set) var hitsToKillCount = 2
+    private(set) var playingTime: Int64 = 60
     
     private let scoresForHit = 1
     private let scoresForKill = 3
