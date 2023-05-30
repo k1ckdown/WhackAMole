@@ -34,18 +34,22 @@ final class GamePresenter {
         addMoles()
     }
     
-    private func startGame() {
+}
+
+private extension GamePresenter {
+    
+    func startGame() {
         createGameTimer()
     }
     
-    private func addMoles() {
+    func addMoles() {
         for _ in 1...numberOfMoles {
             moles.append(Mole(hitCount: 0,
                               state: .disappearing))
         }
     }
     
-    private func createGameTimer() {
+    func createGameTimer() {
         guard gameTimer == nil else { return }
         
         gameTimer = Timer.scheduledTimer(timeInterval: 1,
@@ -56,7 +60,7 @@ final class GamePresenter {
     }
     
     @objc
-    private func play() {
+    func play() {
         gameProgress.completedUnitCount -= 1
         
         if gameProgress.fractionCompleted == 0 {
@@ -68,13 +72,13 @@ final class GamePresenter {
         }
     }
     
-    private func finishGame() {
+    func finishGame() {
         gameTimer?.invalidate()
         isEndGame = true
         print("The end")
     }
     
-    private func getRandomAvailableIndexMole() -> Int? {
+    func getRandomAvailableIndexMole() -> Int? {
         var availableIndexesMole = [Int]()
         for (index, mole) in moles.enumerated() {
             if mole.state == .disappearing {
@@ -85,29 +89,7 @@ final class GamePresenter {
         return availableIndexesMole.randomElement()
     }
     
-    private func applyMoleAppearingState() {
-        guard isEndGame == false else { return }
-        guard let stateType = StateType.allCases.randomElement() else { return }
-        guard let indexMole = getRandomAvailableIndexMole() else { return }
-        
-        moles[indexMole].state = .appearing(type: stateType)
-        view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
-        
-        Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
-            self.applyMoleDisappearingState(at: indexMole)
-        }
-    }
-    
-    private func applyMoleDisappearingState(at indexMole: Int) {
-        switch moles[indexMole].state {
-        case .appearing(type: _):
-            self.moles[indexMole].state = .disappearing
-            self.view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
-        default: return
-        }
-    }
-    
-    private func hurtMole(item: Int, stateType: StateType) {
+    func hurtMole(item: Int, stateType: StateType) {
         game.incrementScoreForKill()
         moles[item].state = .hurt(type: stateType)
         
@@ -119,7 +101,7 @@ final class GamePresenter {
         }
     }
     
-    private func hitMole(item: Int) {
+    func hitMole(item: Int) {
         game.incrementScoreForHit()
         moles[item].state = .hit
         
@@ -132,9 +114,32 @@ final class GamePresenter {
         }
     }
     
+    func applyMoleDisappearingState(at indexMole: Int) {
+        switch moles[indexMole].state {
+        case .appearing(type: _):
+            self.moles[indexMole].state = .disappearing
+            self.view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
+        default: return
+        }
+    }
+    
+    func applyMoleAppearingState() {
+        guard isEndGame == false else { return }
+        guard let stateType = StateType.allCases.randomElement() else { return }
+        guard let indexMole = getRandomAvailableIndexMole() else { return }
+        
+        moles[indexMole].state = .appearing(type: stateType)
+        view?.refreshCollectionItems(at: [IndexPath(item: indexMole, section: 0)])
+        
+        Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
+            self.applyMoleDisappearingState(at: indexMole)
+        }
+    }
+    
 }
 
 extension GamePresenter: GameViewPresenter {
+    
     func viewWillAppear() {
         startGame()
     }

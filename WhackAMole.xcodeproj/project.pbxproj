@@ -125,14 +125,6 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		49E1AB3829F59FE10057CCE0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		49E1AB3929F5A7FE0057CCE0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,40 +134,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		49E1AB3E29F5B0FA0057CCE0 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				49E1AB3F29F5B1130057CCE0 /* StartPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		49E1AB4329F5B43B0057CCE0 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				49E1AB4629F5B4500057CCE0 /* View */,
-				49E1AB4729F5B45A0057CCE0 /* Presenter */,
+				49E1AB4429F5B44D0057CCE0 /* GameViewController.swift */,
+				49387BBE29FD9CE100A3EFB1 /* GamePresenter.swift */,
 				49387BBC29FD9CBB00A3EFB1 /* GameViewDataSource.swift */,
 				49E1AB4829F5B4760057CCE0 /* GameCoordinator.swift */,
 				49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */,
 			);
 			path = Game;
-			sourceTree = "<group>";
-		};
-		49E1AB4629F5B4500057CCE0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				49E1AB4429F5B44D0057CCE0 /* GameViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		49E1AB4729F5B45A0057CCE0 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				49387BBE29FD9CE100A3EFB1 /* GamePresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		49EBAB9B29F5268C0028C802 = {
@@ -232,8 +200,8 @@
 		49EBABBD29F556380028C802 /* Start */ = {
 			isa = PBXGroup;
 			children = (
-				49E1AB3829F59FE10057CCE0 /* View */,
-				49E1AB3E29F5B0FA0057CCE0 /* Presenter */,
+				49E1AB3F29F5B1130057CCE0 /* StartPresenter.swift */,
+				49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */,
 				49E1AB3229F59AF30057CCE0 /* StartCoordinator.swift */,
 				49E1AB4129F5B2350057CCE0 /* StartProtocols.swift */,
 			);

@@ -20,8 +20,8 @@ final class StartViewController: BaseViewController {
             }
         
             enum MoleImageView {
-                static let size: CGFloat = 150
-                static let insetTop: CGFloat = 120
+                static let size: CGFloat = 120
+                static let insetTop: CGFloat = 90
             }
             
             enum StartButton {
@@ -68,6 +68,7 @@ final class StartViewController: BaseViewController {
         headerImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.HeaderImageView.insetTop)
             make.width.equalToSuperview().multipliedBy(Constants.HeaderImageView.multiplierWidth)
+            make.height.equalToSuperview().multipliedBy(0.2)
             make.centerX.equalToSuperview()
         }
     }
@@ -76,7 +77,7 @@ final class StartViewController: BaseViewController {
         view.addSubview(moleImageView)
         
         moleImageView.image = UIImage(named: "appearing-large")
-        moleImageView.contentMode = .scaleAspectFit
+        moleImageView.contentMode = .scaleAspectFill
         
         moleImageView.snp.makeConstraints { make in
             make.top.equalTo(headerImageView.snp.bottom).offset(Constants.MoleImageView.insetTop)
