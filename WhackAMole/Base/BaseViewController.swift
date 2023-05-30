@@ -12,12 +12,13 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = .appWhite
     }
 
 }
 
 extension BaseViewController {
+    
     func setBackgroundImage(named: String) {
         let image = UIImage(named: named)
         let imageView = UIImageView(image: image)
@@ -30,4 +31,5 @@ extension BaseViewController {
             make.edges.equalToSuperview()
         }
     }
+    
 }

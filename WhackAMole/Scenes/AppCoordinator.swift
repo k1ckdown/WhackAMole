@@ -17,16 +17,20 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
-        
         navigationController.navigationBar.isHidden = true
         navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        
+        setupWindow()
         showStartScene()
     }
 }
 
 private extension AppCoordinator {
+    func setupWindow() {
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+    }
+    
     func showStartScene() {
         let startCoordinator = StartCoordinator(navigationController: navigationController)
         coordinate(to: startCoordinator)

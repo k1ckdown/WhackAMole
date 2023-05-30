@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoleLayout: UICollectionViewFlowLayout {
+final class MoleLayout: UICollectionViewFlowLayout {
     
     override func prepare() {
         super.prepare()

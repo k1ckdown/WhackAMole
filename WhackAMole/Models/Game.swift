@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Game {
+final class Game {
     
     private(set) var score = 0
     private(set) var numberOfMoles = 12
