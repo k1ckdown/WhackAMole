@@ -16,6 +16,9 @@
 		49387BC229FD9D2A00A3EFB1 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */; };
 		49387BC429FDA1A400A3EFB1 /* MoleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */; };
 		49462CE32A25D1B30078A50F /* MoleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49462CE22A25D1B30078A50F /* MoleProtocols.swift */; };
+		4946D15A2A2706B200FDB08C /* TimerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946D1592A2706B200FDB08C /* TimerImageView.swift */; };
+		4946D15D2A270D3600FDB08C /* ResultGameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946D15C2A270D3600FDB08C /* ResultGameLabel.swift */; };
+		4946D15F2A270D6800FDB08C /* ResultGameLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946D15E2A270D6800FDB08C /* ResultGameLabelStyle.swift */; };
 		498E697F29F6F7DB008D5C81 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E697E29F6F7DB008D5C81 /* BaseViewController.swift */; };
 		49A9AA8A2A23E91900F062E5 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A9AA892A23E91900F062E5 /* UIFont+AppFonts.swift */; };
 		49D8A28729FE3DFA00DF5B8E /* Mole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D8A28629FE3DFA00DF5B8E /* Mole.swift */; };
@@ -46,6 +49,9 @@
 		49387BC129FD9D2A00A3EFB1 /* GameProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
 		49387BC329FDA1A400A3EFB1 /* MoleLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleLayout.swift; sourceTree = "<group>"; };
 		49462CE22A25D1B30078A50F /* MoleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleProtocols.swift; sourceTree = "<group>"; };
+		4946D1592A2706B200FDB08C /* TimerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerImageView.swift; sourceTree = "<group>"; };
+		4946D15C2A270D3600FDB08C /* ResultGameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGameLabel.swift; sourceTree = "<group>"; };
+		4946D15E2A270D6800FDB08C /* ResultGameLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGameLabelStyle.swift; sourceTree = "<group>"; };
 		498E697E29F6F7DB008D5C81 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		49A9AA892A23E91900F062E5 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		49D8A28629FE3DFA00DF5B8E /* Mole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mole.swift; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 		49387BB229FD865F00A3EFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4946D15B2A270D0300FDB08C /* Labels */,
+				4946D1582A27069700FDB08C /* ImageViews */,
 				492301822A251D34006C41CB /* CollectionViewCells */,
 			);
 			path = Views;
@@ -113,6 +121,23 @@
 				492301802A251790006C41CB /* Game.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4946D1582A27069700FDB08C /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				4946D1592A2706B200FDB08C /* TimerImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		4946D15B2A270D0300FDB08C /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				4946D15C2A270D3600FDB08C /* ResultGameLabel.swift */,
+				4946D15E2A270D6800FDB08C /* ResultGameLabelStyle.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 		49E1AB2D29F55A880057CCE0 /* Scenes */ = {
@@ -304,6 +329,7 @@
 				49462CE32A25D1B30078A50F /* MoleProtocols.swift in Sources */,
 				49EBABC229F557940028C802 /* BaseCoordinator.swift in Sources */,
 				49E1AB3329F59AF30057CCE0 /* StartCoordinator.swift in Sources */,
+				4946D15D2A270D3600FDB08C /* ResultGameLabel.swift in Sources */,
 				49E1AB4229F5B2350057CCE0 /* StartProtocols.swift in Sources */,
 				49D8A28729FE3DFA00DF5B8E /* Mole.swift in Sources */,
 				49E1AB4029F5B1130057CCE0 /* StartPresenter.swift in Sources */,
@@ -312,7 +338,9 @@
 				49387BB629FD873800A3EFB1 /* MoleViewCell.swift in Sources */,
 				49387BBB29FD9C2000A3EFB1 /* MoleState.swift in Sources */,
 				49A9AA8A2A23E91900F062E5 /* UIFont+AppFonts.swift in Sources */,
+				4946D15A2A2706B200FDB08C /* TimerImageView.swift in Sources */,
 				49E1AB3B29F5A8100057CCE0 /* UIColor+AppColors.swift in Sources */,
+				4946D15F2A270D6800FDB08C /* ResultGameLabelStyle.swift in Sources */,
 				49EBABA829F5268C0028C802 /* AppDelegate.swift in Sources */,
 				49E1AB4529F5B44D0057CCE0 /* GameViewController.swift in Sources */,
 				492301812A251790006C41CB /* Game.swift in Sources */,

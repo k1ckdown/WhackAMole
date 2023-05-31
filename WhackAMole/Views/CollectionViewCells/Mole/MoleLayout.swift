@@ -23,9 +23,9 @@ final class MoleLayout: UICollectionViewFlowLayout {
         let itemsInRow: CGFloat = 3
         let sideInset = sectionInset.left * 2
         let lineInset = minimumInteritemSpacing * (itemsInRow - 1) + sideInset
-        let availableSpace = collectionView.frame.width - lineInset
+        let availableSpace = collectionView.bounds.width - lineInset
         
-        let cellSize = availableSpace / itemsInRow
+        let cellSize = availableSpace / itemsInRow * 0.98
         itemSize = CGSize(width: cellSize, height: cellSize)
     }
 

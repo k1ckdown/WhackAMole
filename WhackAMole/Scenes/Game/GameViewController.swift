@@ -45,15 +45,42 @@ final class GameViewController: BaseViewController {
                 static let inset: CGFloat = 6
             }
         
-            enum TimerImageView {
+            enum GameTimerImageView {
                 static let size: CGFloat = 50
                 static let insetTop: CGFloat = 20
                 static let insetTrailing: CGFloat = 12
-                static let cornerRadius: CGFloat = size / 2
             }
         
             enum MolesCollectionView {
                 static let insetTop: CGFloat = 30
+            }
+        
+            enum ResultView {
+                static let width: CGFloat = 300
+                static let height: CGFloat = 380
+                static let inset: CGFloat = 7
+                static let borderWidth: CGFloat = 10
+                static let cornerRadius: CGFloat = 30
+            }
+        
+            enum ResultTimerImageView {
+                static let size: CGFloat = 70
+                static let insetTop: CGFloat = 50
+            }
+        
+            enum ResultTitleLabel {
+                static let insetTop: CGFloat = 30
+            }
+        
+            enum ResultScoreLabel {
+                static let insetTop: CGFloat = 10
+            }
+        
+            enum PlayAgainButton {
+                static let width: CGFloat = 220
+                static let height: CGFloat = 60
+                static let insetTop: CGFloat = 40
+                static let cornerRadius: CGFloat = 20
             }
         
     }
@@ -63,11 +90,17 @@ final class GameViewController: BaseViewController {
     private let scoreLabel = UILabel()
     private let coinImageView = UIImageView()
     
-    private let timerImageView = UIImageView()
+    private let clockImageView = UIImageView()
+    private let gameTimerImageView = TimerImageView()
     private let timerProgressView = UIProgressView()
     private let timerProgressWrapperView = UIView()
     
-    private let clockImageView = UIImageView()
+    private let resultView = UIView()
+    private let resultWrapperView = UIView()
+    private let resultTimerImageView = TimerImageView()
+    private let resultScoreLabel = ResultGameLabel(style: .score)
+    private let resultTitleLabel = ResultGameLabel(style: .title)
+    private let playAgainButton = UIButton(type: .system)
     
     private lazy var molesCollectionView: UICollectionView = {
         let layout = MoleLayout()
@@ -102,8 +135,14 @@ final class GameViewController: BaseViewController {
         setupCoinImageView()
         setupTimerProgressWrapperView()
         setupTimerProgressView()
-        setupTimerImageView()
+        setupGameTimerImageView()
         setupMolesCollectionView()
+        setupResultWrapperView()
+        setupResultView()
+        setupResultTimerImageView()
+        setupResultTitleLabel()
+        setupResultScoreLabel()
+        setupPlayAgainButton()
     }
     
     private func setupSuperView() {
@@ -172,18 +211,13 @@ final class GameViewController: BaseViewController {
         }
     }
     
-    private func setupTimerImageView() {
-        view.addSubview(timerImageView)
+    private func setupGameTimerImageView() {
+        view.addSubview(gameTimerImageView)
         
-        timerImageView.image = UIImage(named: "clock")
-        timerImageView.contentMode = .scaleAspectFill
-        timerImageView.backgroundColor = .appWhite
-        timerImageView.layer.cornerRadius = Constants.TimerImageView.cornerRadius
-        
-        timerImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(Constants.TimerImageView.size)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.TimerImageView.insetTop)
-            make.trailing.equalTo(timerProgressWrapperView.snp.leading).offset(Constants.TimerImageView.insetTrailing)
+        gameTimerImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(Constants.GameTimerImageView.size)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.GameTimerImageView.insetTop)
+            make.trailing.equalTo(timerProgressWrapperView.snp.leading).offset(Constants.GameTimerImageView.insetTrailing)
         }
     }
     
@@ -195,6 +229,84 @@ final class GameViewController: BaseViewController {
         molesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(coinImageView.snp.bottom).offset(Constants.MolesCollectionView.insetTop)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupResultWrapperView() {
+        view.addSubview(resultWrapperView)
+        
+        resultWrapperView.backgroundColor = .appWhite
+        resultWrapperView.isHidden = true
+        resultWrapperView.layer.cornerRadius = Constants.ResultView.cornerRadius
+        
+        resultWrapperView.snp.makeConstraints { make in
+            make.width.equalTo(Constants.ResultView.width)
+            make.height.equalTo(Constants.ResultView.height)
+            make.center.equalToSuperview()
+        }
+    }
+    
+    private func setupResultView() {
+        resultWrapperView.addSubview(resultView)
+        
+        resultView.backgroundColor = .timerProgress
+        resultView.layer.borderWidth = Constants.ResultView.borderWidth
+        resultView.layer.borderColor = UIColor.timerTrack?.cgColor
+        resultView.layer.cornerRadius = Constants.ResultView.cornerRadius
+        
+        resultView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(Constants.ResultView.inset)
+        }
+    }
+    
+    private func setupResultTimerImageView() {
+        resultView.addSubview(resultTimerImageView)
+        
+        resultTimerImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(Constants.ResultTimerImageView.size)
+            make.top.equalToSuperview().offset(Constants.ResultTimerImageView.insetTop)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupResultTitleLabel() {
+        resultView.addSubview(resultTitleLabel)
+        
+        resultTitleLabel.text = "Time's up!"
+        
+        resultTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(resultTimerImageView.snp.bottom).offset(Constants.ResultTitleLabel.insetTop)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupResultScoreLabel() {
+        resultView.addSubview(resultScoreLabel)
+        
+        resultScoreLabel.text = "Your score: 123"
+        
+        resultScoreLabel.snp.makeConstraints { make in
+            make.top.equalTo(resultTitleLabel.snp.bottom).offset(Constants.ResultScoreLabel.insetTop)
+            make.centerX.equalToSuperview()
+        }
+        
+    }
+    
+    private func setupPlayAgainButton() {
+        resultView.addSubview(playAgainButton)
+        
+        playAgainButton.setTitle("Play Again", for: .normal)
+        playAgainButton.titleLabel?.font = .playAgainTitle
+        playAgainButton.setTitleColor(.appWhite, for: .normal)
+        playAgainButton.backgroundColor = .playAgainButton
+        playAgainButton.clipsToBounds = true
+        playAgainButton.layer.cornerRadius = Constants.PlayAgainButton.cornerRadius
+        
+        playAgainButton.snp.makeConstraints { make in
+            make.top.equalTo(resultScoreLabel.snp.bottom).offset(Constants.PlayAgainButton.insetTop)
+            make.width.equalTo(Constants.PlayAgainButton.width)
+            make.height.equalTo(Constants.PlayAgainButton.height)
+            make.centerX.equalToSuperview()
         }
     }
 }
