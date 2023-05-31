@@ -14,6 +14,7 @@ protocol GameView: AnyObject {
     func updateGameScoreTitle(_ title: String)
     func updateResultScoreTitle(_ title: String)
     func refreshCollectionItems(at items: [IndexPath])
+    func refreshCollection()
 }
 
 protocol GameViewPresenter: AnyObject {

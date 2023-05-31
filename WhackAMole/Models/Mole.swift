@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct Mole {
+class Mole {
     var hitCount: Int
     var state: MoleState
+    
+    init(hitCount: Int, state: MoleState) {
+        self.hitCount = hitCount
+        self.state = state
+    }
 }

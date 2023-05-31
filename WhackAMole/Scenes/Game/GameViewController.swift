@@ -315,6 +315,10 @@ final class GameViewController: BaseViewController {
 
 extension GameViewController: GameView {
     
+    func refreshCollection() {
+        molesCollectionView.reloadData()
+    }
+    
     func displayResultView() {
         resultWrapperView.isHidden = false
     }

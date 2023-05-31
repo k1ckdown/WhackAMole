@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 final class GamePresenter {
     
@@ -20,7 +21,10 @@ final class GamePresenter {
     private var moles: [Mole]
     private let game: Game
     private var isEndGame = false
+    
     private var gameTimer: Timer?
+    private var player: AVAudioPlayer?
+    
     private let endTimeTitle = "Time's up!"
     private let winningTitle = "Top scorer!"
     
@@ -81,6 +85,16 @@ private extension GamePresenter {
         view?.updateResultScoreTitle("Your score: \(game.score)")
     }
     
+    func playAgain() {
+        moles.forEach { $0.state = .disappearing }
+        
+        view?.hideResultView()
+        view?.refreshCollection()
+        
+        startGame()
+        isEndGame = false
+    }
+    
     func getRandomAvailableIndexMole() -> Int? {
         var availableIndexesMole = [Int]()
         for (index, mole) in moles.enumerated() {
@@ -138,6 +152,24 @@ private extension GamePresenter {
             self.applyMoleDisappearingState(at: indexMole)
         }
     }
+
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "Pop", withExtension: "mp3") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+
+            guard let player = player else { return }
+
+            player.play()
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
     
 }
 
@@ -152,15 +184,13 @@ extension GamePresenter: GameViewPresenter {
     }
     
     func didTapOnPlayAgain() {
-        view?.hideResultView()
-        
-        startGame()
-        isEndGame = false
+        playAgain()
     }
     
     func didTapOnMole(at item: Int) {
         switch (moles[item].state) {
         case .appearing(type: let type):
+            playSound()
             moles[item].hitCount += 1
             
             if (moles[item].hitCount == game.hitsToKillCount) {
