@@ -129,6 +129,11 @@ final class GameViewController: BaseViewController {
         presenter?.viewWillAppear()
     }
     
+    @objc
+    private func handlePlayAgainButton() {
+        presenter?.didTapOnPlayAgain()
+    }
+    
     private func setup() {
         setupSuperView()
         setupScoreLabel()
@@ -272,8 +277,6 @@ final class GameViewController: BaseViewController {
     private func setupResultTitleLabel() {
         resultView.addSubview(resultTitleLabel)
         
-        resultTitleLabel.text = "Time's up!"
-        
         resultTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(resultTimerImageView.snp.bottom).offset(Constants.ResultTitleLabel.insetTop)
             make.centerX.equalToSuperview()
@@ -282,8 +285,6 @@ final class GameViewController: BaseViewController {
     
     private func setupResultScoreLabel() {
         resultView.addSubview(resultScoreLabel)
-        
-        resultScoreLabel.text = "Your score: 123"
         
         resultScoreLabel.snp.makeConstraints { make in
             make.top.equalTo(resultTitleLabel.snp.bottom).offset(Constants.ResultScoreLabel.insetTop)
@@ -301,6 +302,7 @@ final class GameViewController: BaseViewController {
         playAgainButton.backgroundColor = .playAgainButton
         playAgainButton.clipsToBounds = true
         playAgainButton.layer.cornerRadius = Constants.PlayAgainButton.cornerRadius
+        playAgainButton.addTarget(self, action: #selector(handlePlayAgainButton), for: .touchUpInside)
         
         playAgainButton.snp.makeConstraints { make in
             make.top.equalTo(resultScoreLabel.snp.bottom).offset(Constants.PlayAgainButton.insetTop)
@@ -312,7 +314,24 @@ final class GameViewController: BaseViewController {
 }
 
 extension GameViewController: GameView {
-    func updateScoreTitle(_ title: String) {
+    
+    func displayResultView() {
+        resultWrapperView.isHidden = false
+    }
+    
+    func hideResultView() {
+        resultWrapperView.isHidden = true
+    }
+    
+    func updateResultTitle(_ title: String) {
+        resultTitleLabel.text = title
+    }
+    
+    func updateResultScoreTitle(_ title: String) {
+        resultScoreLabel.text = title
+    }
+    
+    func updateGameScoreTitle(_ title: String) {
         scoreLabel.text = title
     }
     
@@ -321,4 +340,5 @@ extension GameViewController: GameView {
             molesCollectionView.reloadItems(at: items)
         }
     }
+    
 }

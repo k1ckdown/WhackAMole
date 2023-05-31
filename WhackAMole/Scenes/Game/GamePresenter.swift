@@ -21,6 +21,8 @@ final class GamePresenter {
     private let game: Game
     private var isEndGame = false
     private var gameTimer: Timer?
+    private let endTimeTitle = "Time's up!"
+    private let winningTitle = "Top scorer!"
     
     init(view: GameView) {
         self.view = view
@@ -29,7 +31,6 @@ final class GamePresenter {
         moles = .init()
         
         gameProgress = .init(totalUnitCount: game.playingTime)
-        gameProgress.completedUnitCount = game.playingTime
         
         addMoles()
     }
@@ -39,7 +40,8 @@ final class GamePresenter {
 private extension GamePresenter {
     
     func startGame() {
-        createGameTimer()
+        gameProgress.completedUnitCount = game.playingTime
+        startGameTimer()
     }
     
     func addMoles() {
@@ -49,9 +51,7 @@ private extension GamePresenter {
         }
     }
     
-    func createGameTimer() {
-        guard gameTimer == nil else { return }
-        
+    func startGameTimer() {
         gameTimer = Timer.scheduledTimer(timeInterval: 1,
                                          target: self,
                                          selector: #selector(play),
@@ -75,7 +75,10 @@ private extension GamePresenter {
     func finishGame() {
         gameTimer?.invalidate()
         isEndGame = true
-        print("The end")
+        
+        view?.displayResultView()
+        view?.updateResultTitle(game.isMaxScore ? winningTitle : endTimeTitle)
+        view?.updateResultScoreTitle("Your score: \(game.score)")
     }
     
     func getRandomAvailableIndexMole() -> Int? {
@@ -93,7 +96,7 @@ private extension GamePresenter {
         game.incrementScoreForKill()
         moles[item].state = .hurt(type: stateType)
         
-        view?.updateScoreTitle("\(game.score)")
+        view?.updateGameScoreTitle("\(game.score)")
         view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
         
         if game.isMaxScore {
@@ -105,7 +108,7 @@ private extension GamePresenter {
         game.incrementScoreForHit()
         moles[item].state = .hit
         
-        view?.updateScoreTitle("\(game.score)")
+        view?.updateGameScoreTitle("\(game.score)")
         view?.refreshCollectionItems(at: [IndexPath(item: item, section: 0)])
 
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
@@ -146,6 +149,13 @@ extension GamePresenter: GameViewPresenter {
     
     func configure(cell: MoleView, forItem item: Int) {
         cell.updateImageView(to: moles[item].state.description)
+    }
+    
+    func didTapOnPlayAgain() {
+        view?.hideResultView()
+        
+        startGame()
+        isEndGame = false
     }
     
     func didTapOnMole(at item: Int) {

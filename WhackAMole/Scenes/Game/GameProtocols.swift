@@ -8,7 +8,11 @@
 import Foundation
 
 protocol GameView: AnyObject {
-    func updateScoreTitle(_ title: String)
+    func displayResultView()
+    func hideResultView()
+    func updateResultTitle(_ title: String)
+    func updateGameScoreTitle(_ title: String)
+    func updateResultScoreTitle(_ title: String)
     func refreshCollectionItems(at items: [IndexPath])
 }
 
@@ -17,6 +21,7 @@ protocol GameViewPresenter: AnyObject {
     var gameProgress: Progress { get }
     
     func viewWillAppear()
+    func didTapOnPlayAgain()
     func didTapOnMole(at item: Int)
     func configure(cell: MoleView, forItem item: Int)
 }
