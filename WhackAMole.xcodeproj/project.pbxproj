@@ -38,6 +38,7 @@
 		49EBABB429F5268C0028C802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EBABB229F5268C0028C802 /* LaunchScreen.storyboard */; };
 		49EBABC029F5565A0028C802 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EBABBF29F5565A0028C802 /* Coordinator.swift */; };
 		49EBABC229F557940028C802 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EBABC129F557940028C802 /* BaseCoordinator.swift */; };
+		49FDDA9A2A28C4C800D66F05 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDDA992A28C4C800D66F05 /* AudioPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		49EBABB529F5268C0028C802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49EBABBF29F5565A0028C802 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		49EBABC129F557940028C802 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		49FDDA992A28C4C800D66F05 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 		49EBABA629F5268C0028C802 /* WhackAMole */ = {
 			isa = PBXGroup;
 			children = (
+				49FDDA982A28C4BB00D66F05 /* Utils */,
 				4946D1602A2721E400FDB08C /* Resources */,
 				49387BB929FD9C1200A3EFB1 /* Models */,
 				49387BB229FD865F00A3EFB1 /* Views */,
@@ -251,6 +254,14 @@
 				4923017E2A250373006C41CB /* ReuseIdentifier.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		49FDDA982A28C4BB00D66F05 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				49FDDA992A28C4C800D66F05 /* AudioPlayer.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +368,7 @@
 				49E1AB4529F5B44D0057CCE0 /* GameViewController.swift in Sources */,
 				492301812A251790006C41CB /* Game.swift in Sources */,
 				49EBABAA29F5268C0028C802 /* SceneDelegate.swift in Sources */,
+				49FDDA9A2A28C4C800D66F05 /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

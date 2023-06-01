@@ -23,7 +23,7 @@ final class GamePresenter {
     private var isEndGame = false
     
     private var gameTimer: Timer?
-    private var player: AVAudioPlayer?
+    private var audioPlayer: AudioPlayer?
     
     private let endTimeTitle = "Time's up!"
     private let winningTitle = "Top scorer!"
@@ -33,10 +33,11 @@ final class GamePresenter {
         
         game = .init()
         moles = .init()
-        
         gameProgress = .init(totalUnitCount: game.playingTime)
-        
         addMoles()
+        
+        guard let url = Bundle.main.url(forResource: "Pop", withExtension: "mp3") else { return }
+        audioPlayer = .init(mediaUrl: url)
     }
     
 }
@@ -155,24 +156,6 @@ private extension GamePresenter {
             self.applyMoleDisappearingState(at: indexMole)
         }
     }
-
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "Pop", withExtension: "mp3") else { return }
-
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-
-            guard let player = player else { return }
-
-            player.play()
-
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
     
 }
 
@@ -193,7 +176,7 @@ extension GamePresenter: GameViewPresenter {
     func didTapOnMole(at item: Int) {
         switch (moles[item].state) {
         case .appearing(type: let type):
-            playSound()
+            audioPlayer?.play()
             moles[item].hitCount += 1
             
             if (moles[item].hitCount == game.hitsToKillCount) {
