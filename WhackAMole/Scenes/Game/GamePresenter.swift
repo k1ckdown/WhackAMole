@@ -44,6 +44,8 @@ final class GamePresenter {
 private extension GamePresenter {
     
     func startGame() {
+        view?.updateGameScoreTitle("\(game.score)")
+        
         gameProgress.completedUnitCount = game.playingTime
         startGameTimer()
     }
@@ -91,6 +93,7 @@ private extension GamePresenter {
         view?.hideResultView()
         view?.refreshCollection()
         
+        game.resetScore()
         startGame()
         isEndGame = false
     }

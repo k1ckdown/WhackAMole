@@ -29,4 +29,8 @@ final class Game {
         score += scoresForKill
     }
     
+    func resetScore() {
+        score = 0
+    }
+    
 }
