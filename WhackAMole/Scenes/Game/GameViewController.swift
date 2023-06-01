@@ -307,7 +307,7 @@ final class GameViewController: BaseViewController {
     private func setupPlayAgainButton() {
         resultWindowView.addSubview(playAgainButton)
         
-        playAgainButton.setTitle("Play Again", for: .normal)
+        playAgainButton.setTitle(presenter?.playAgainTitle, for: .normal)
         playAgainButton.titleLabel?.font = .playAgainTitle
         playAgainButton.setTitleColor(.appWhite, for: .normal)
         playAgainButton.backgroundColor = .playAgainButton

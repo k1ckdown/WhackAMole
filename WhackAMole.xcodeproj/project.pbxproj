@@ -39,6 +39,10 @@
 		49EBABC029F5565A0028C802 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EBABBF29F5565A0028C802 /* Coordinator.swift */; };
 		49EBABC229F557940028C802 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EBABC129F557940028C802 /* BaseCoordinator.swift */; };
 		49FDDA9A2A28C4C800D66F05 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDDA992A28C4C800D66F05 /* AudioPlayer.swift */; };
+		49FDDA9D2A28CB9800D66F05 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDDA9C2A28CB9800D66F05 /* Localizable.swift */; };
+		49FDDA9F2A28CBEE00D66F05 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDDA9E2A28CBEE00D66F05 /* LocalizedStrings.swift */; };
+		49FDDAA32A28CC4C00D66F05 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49FDDAA52A28CC4C00D66F05 /* Localizable.strings */; };
+		49FDDAA82A28D84900D66F05 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDDAA72A28D84900D66F05 /* String+Localized.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +79,12 @@
 		49EBABBF29F5565A0028C802 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		49EBABC129F557940028C802 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		49FDDA992A28C4C800D66F05 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		49FDDA9C2A28CB9800D66F05 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		49FDDA9E2A28CBEE00D66F05 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
+		49FDDAA02A28CC3000D66F05 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		49FDDAA42A28CC4C00D66F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		49FDDAA62A28CC4E00D66F05 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		49FDDAA72A28D84900D66F05 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +161,7 @@
 				49EBABB029F5268C0028C802 /* Assets.xcassets */,
 				49EBABB229F5268C0028C802 /* LaunchScreen.storyboard */,
 				49EBABB529F5268C0028C802 /* Info.plist */,
+				49FDDAA52A28CC4C00D66F05 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -170,6 +181,7 @@
 			children = (
 				49E1AB3A29F5A8100057CCE0 /* UIColor+AppColors.swift */,
 				49A9AA892A23E91900F062E5 /* UIFont+AppFonts.swift */,
+				49FDDAA72A28D84900D66F05 /* String+Localized.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -205,6 +217,7 @@
 		49EBABA629F5268C0028C802 /* WhackAMole */ = {
 			isa = PBXGroup;
 			children = (
+				49FDDA9B2A28CB8300D66F05 /* Localization */,
 				49FDDA982A28C4BB00D66F05 /* Utils */,
 				4946D1602A2721E400FDB08C /* Resources */,
 				49387BB929FD9C1200A3EFB1 /* Models */,
@@ -264,6 +277,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		49FDDA9B2A28CB8300D66F05 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				49FDDA9C2A28CB9800D66F05 /* Localizable.swift */,
+				49FDDA9E2A28CBEE00D66F05 /* LocalizedStrings.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -309,6 +331,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 49EBAB9B29F5268C0028C802;
 			packageReferences = (
@@ -329,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4946D1622A27229F00FDB08C /* Pop.mp3 in Resources */,
+				49FDDAA32A28CC4C00D66F05 /* Localizable.strings in Resources */,
 				49EBABB429F5268C0028C802 /* LaunchScreen.storyboard in Resources */,
 				49EBABB129F5268C0028C802 /* Assets.xcassets in Resources */,
 			);
@@ -349,6 +373,7 @@
 				4923017F2A250373006C41CB /* ReuseIdentifier.swift in Sources */,
 				49E1AB3129F55B8D0057CCE0 /* StartViewController.swift in Sources */,
 				49387BBD29FD9CBB00A3EFB1 /* GameViewDataSource.swift in Sources */,
+				49FDDA9D2A28CB9800D66F05 /* Localizable.swift in Sources */,
 				49462CE32A25D1B30078A50F /* MoleProtocols.swift in Sources */,
 				49EBABC229F557940028C802 /* BaseCoordinator.swift in Sources */,
 				49E1AB3329F59AF30057CCE0 /* StartCoordinator.swift in Sources */,
@@ -358,11 +383,13 @@
 				49E1AB4029F5B1130057CCE0 /* StartPresenter.swift in Sources */,
 				49E1AB4929F5B4760057CCE0 /* GameCoordinator.swift in Sources */,
 				49EBABC029F5565A0028C802 /* Coordinator.swift in Sources */,
+				49FDDA9F2A28CBEE00D66F05 /* LocalizedStrings.swift in Sources */,
 				49387BB629FD873800A3EFB1 /* MoleViewCell.swift in Sources */,
 				49387BBB29FD9C2000A3EFB1 /* MoleState.swift in Sources */,
 				49A9AA8A2A23E91900F062E5 /* UIFont+AppFonts.swift in Sources */,
 				4946D15A2A2706B200FDB08C /* TimerImageView.swift in Sources */,
 				49E1AB3B29F5A8100057CCE0 /* UIColor+AppColors.swift in Sources */,
+				49FDDAA82A28D84900D66F05 /* String+Localized.swift in Sources */,
 				4946D15F2A270D6800FDB08C /* ResultGameLabelStyle.swift in Sources */,
 				49EBABA829F5268C0028C802 /* AppDelegate.swift in Sources */,
 				49E1AB4529F5B44D0057CCE0 /* GameViewController.swift in Sources */,
@@ -379,8 +406,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				49EBABB329F5268C0028C802 /* Base */,
+				49FDDAA02A28CC3000D66F05 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		49FDDAA52A28CC4C00D66F05 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49FDDAA42A28CC4C00D66F05 /* en */,
+				49FDDAA62A28CC4E00D66F05 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -390,6 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -450,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

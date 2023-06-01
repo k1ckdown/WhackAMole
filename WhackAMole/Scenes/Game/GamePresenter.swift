@@ -15,6 +15,7 @@ final class GamePresenter {
     }
     
     let gameProgress: Progress
+    private(set) var playAgainTitle = LocalizedStrings.playAgainTitle()
     
     private weak var view: GameView?
     
@@ -25,8 +26,8 @@ final class GamePresenter {
     private var gameTimer: Timer?
     private var audioPlayer: AudioPlayer?
     
-    private let endTimeTitle = "Time's up!"
-    private let winningTitle = "Top scorer!"
+    private let endTimeTitle = LocalizedStrings.timeIsUp()
+    private let winningTitle = LocalizedStrings.topScorer()
     
     init(view: GameView) {
         self.view = view
@@ -85,7 +86,7 @@ private extension GamePresenter {
         
         view?.displayResultView()
         view?.updateResultTitle(game.isMaxScore ? winningTitle : endTimeTitle)
-        view?.updateResultScoreTitle("Your score: \(game.score)")
+        view?.updateResultScoreTitle("\(LocalizedStrings.yourScore()): \(game.score)")
     }
     
     func playAgain() {

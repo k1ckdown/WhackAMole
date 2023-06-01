@@ -20,6 +20,7 @@ protocol GameView: AnyObject {
 protocol GameViewPresenter: AnyObject {
     var numberOfMoles: Int { get }
     var gameProgress: Progress { get }
+    var playAgainTitle: String { get }
     
     func viewWillAppear()
     func didTapOnPlayAgain()
