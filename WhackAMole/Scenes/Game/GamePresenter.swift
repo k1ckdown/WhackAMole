@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
 
 final class GamePresenter {
     
@@ -177,13 +176,16 @@ extension GamePresenter: GameViewPresenter {
     func didTapOnMole(at item: Int) {
         switch (moles[item].state) {
         case .appearing(type: let type):
-            audioPlayer?.play()
             moles[item].hitCount += 1
             
             if (moles[item].hitCount == game.hitsToKillCount) {
                 hurtMole(item: item, stateType: type)
             } else {
                 hitMole(item: item)
+            }
+            
+            DispatchQueue.global().async { [weak self] in
+                self?.audioPlayer?.play()
             }
             
         default: return
