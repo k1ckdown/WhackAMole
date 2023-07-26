@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  WhackAMole
+
+  Created by Ivan Semenov on 01.06.2023.
+  
+*/
+
+"timeIsUp" = "Время вышло!";
+"topScorer" = "Лучший бомбардир!";
+"yourScore" = "Твой результат";
+"playAgainTitle" = "Играть снова";
