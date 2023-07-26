@@ -9,80 +9,10 @@ import UIKit
 
 final class GameViewController: BaseViewController {
     
-    var presenter: GameViewPresenter? {
+    var output: GameViewOutput? {
         didSet {
-            dataSource.presenter = presenter
+            dataSource.output = output
         }
-    }
-    
-    private enum Constants {
-        
-            enum ScoreLabel {
-                static let height: CGFloat = 35
-                static let width: CGFloat = 120
-                static let insetTop: CGFloat = 30
-                static let insetLeading: CGFloat = 55
-                static let cornerRadius: CGFloat = 10
-            }
-        
-            enum CoinImageView {
-                static let size: CGFloat = 55
-                static let insetTop: CGFloat = 20
-                static let insetTrailing: CGFloat = 15
-                static let borderWidth: CGFloat = 4
-                static let cornerRadius: CGFloat = size / 2
-            }
-        
-            enum TimerProgressWrapperView {
-                static let height: CGFloat = 35
-                static let width: CGFloat = 120
-                static let insetTop: CGFloat = 30
-                static let insetTrailing: CGFloat = 15
-                static let cornerRadius: CGFloat = 7
-            }
-        
-            enum TimerProgressView {
-                static let inset: CGFloat = 6
-            }
-        
-            enum GameTimerImageView {
-                static let size: CGFloat = 50
-                static let insetTop: CGFloat = 20
-                static let insetTrailing: CGFloat = 12
-            }
-        
-            enum MolesCollectionView {
-                static let insetTop: CGFloat = 30
-            }
-        
-            enum ResultWindowView {
-                static let width: CGFloat = 300
-                static let height: CGFloat = 380
-                static let inset: CGFloat = 7
-                static let borderWidth: CGFloat = 10
-                static let cornerRadius: CGFloat = 30
-            }
-        
-            enum ResultTimerImageView {
-                static let size: CGFloat = 70
-                static let insetTop: CGFloat = 50
-            }
-        
-            enum ResultTitleLabel {
-                static let insetTop: CGFloat = 30
-            }
-        
-            enum ResultScoreLabel {
-                static let insetTop: CGFloat = 10
-            }
-        
-            enum PlayAgainButton {
-                static let width: CGFloat = 220
-                static let height: CGFloat = 60
-                static let insetTop: CGFloat = 40
-                static let cornerRadius: CGFloat = 20
-            }
-        
     }
     
     private let dataSource: GameViewDataSource
@@ -127,12 +57,12 @@ final class GameViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
+        output?.viewWillAppear()
     }
     
     @objc
     private func handlePlayAgainButton() {
-        presenter?.didTapOnPlayAgain()
+        output?.didTapOnPlayAgain()
     }
     
     private func setup() {
@@ -210,7 +140,7 @@ final class GameViewController: BaseViewController {
         
         timerProgressView.trackTintColor = .timerTrack
         timerProgressView.progressTintColor = .timerProgress
-        timerProgressView.observedProgress = presenter?.gameProgress
+        timerProgressView.observedProgress = output?.gameProgress
         
         timerProgressView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(Constants.TimerProgressView.inset)
@@ -231,6 +161,7 @@ final class GameViewController: BaseViewController {
         view.addSubview(molesCollectionView)
         
         molesCollectionView.backgroundColor = .clear
+        molesCollectionView.delegate = self
         
         molesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(coinImageView.snp.bottom).offset(Constants.MolesCollectionView.insetTop)
@@ -307,7 +238,7 @@ final class GameViewController: BaseViewController {
     private func setupPlayAgainButton() {
         resultWindowView.addSubview(playAgainButton)
         
-        playAgainButton.setTitle(presenter?.playAgainTitle, for: .normal)
+        playAgainButton.setTitle(output?.playAgainTitle, for: .normal)
         playAgainButton.titleLabel?.font = .playAgainTitle
         playAgainButton.setTitleColor(.appWhite, for: .normal)
         playAgainButton.backgroundColor = .playAgainButton
@@ -324,9 +255,11 @@ final class GameViewController: BaseViewController {
     }
 }
 
-extension GameViewController: GameView {
+// MARK: - GameViewInput
+
+extension GameViewController: GameViewInput {
     
-    func displayResultView() {
+    func showResultView() {
         resultView.isHidden = false
     }
     
@@ -354,6 +287,90 @@ extension GameViewController: GameView {
         UIView.performWithoutAnimation {
             molesCollectionView.reloadItems(at: items)
         }
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension GameViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        output?.didTapOnMole(at: indexPath.item)
+    }
+    
+}
+
+private extension GameViewController {
+    
+    enum Constants {
+        
+            enum ScoreLabel {
+                static let height: CGFloat = 35
+                static let width: CGFloat = 120
+                static let insetTop: CGFloat = 30
+                static let insetLeading: CGFloat = 55
+                static let cornerRadius: CGFloat = 10
+            }
+        
+            enum CoinImageView {
+                static let size: CGFloat = 55
+                static let insetTop: CGFloat = 20
+                static let insetTrailing: CGFloat = 15
+                static let borderWidth: CGFloat = 4
+                static let cornerRadius: CGFloat = size / 2
+            }
+        
+            enum TimerProgressWrapperView {
+                static let height: CGFloat = 35
+                static let width: CGFloat = 120
+                static let insetTop: CGFloat = 30
+                static let insetTrailing: CGFloat = 15
+                static let cornerRadius: CGFloat = 7
+            }
+        
+            enum TimerProgressView {
+                static let inset: CGFloat = 6
+            }
+        
+            enum GameTimerImageView {
+                static let size: CGFloat = 50
+                static let insetTop: CGFloat = 20
+                static let insetTrailing: CGFloat = 12
+            }
+        
+            enum MolesCollectionView {
+                static let insetTop: CGFloat = 30
+            }
+        
+            enum ResultWindowView {
+                static let width: CGFloat = 300
+                static let height: CGFloat = 380
+                static let inset: CGFloat = 7
+                static let borderWidth: CGFloat = 10
+                static let cornerRadius: CGFloat = 30
+            }
+        
+            enum ResultTimerImageView {
+                static let size: CGFloat = 70
+                static let insetTop: CGFloat = 50
+            }
+        
+            enum ResultTitleLabel {
+                static let insetTop: CGFloat = 30
+            }
+        
+            enum ResultScoreLabel {
+                static let insetTop: CGFloat = 10
+            }
+        
+            enum PlayAgainButton {
+                static let width: CGFloat = 220
+                static let height: CGFloat = 60
+                static let insetTop: CGFloat = 40
+                static let cornerRadius: CGFloat = 20
+            }
+        
     }
     
 }

@@ -16,7 +16,7 @@ final class GameCoordinator: BaseCoordinator {
     override func start() {
         let gameViewController = GameViewController()
         let gamePresenter = GamePresenter(view: gameViewController)
-        gameViewController.presenter = gamePresenter
+        gameViewController.output = gamePresenter
         
         navigationController.pushViewController(gameViewController, animated: true)
     }

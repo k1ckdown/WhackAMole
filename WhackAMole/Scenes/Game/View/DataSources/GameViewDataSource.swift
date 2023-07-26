@@ -8,32 +8,28 @@
 import UIKit
 
 final class GameViewDataSource: NSObject {
-    var presenter: GameViewPresenter!
+    var output: GameViewOutput!
     
     func configure(with collectionView: UICollectionView) {
         collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.register(MoleViewCell.self, forCellWithReuseIdentifier: MoleViewCell.reuseIdentifier)
     }
 }
 
 extension GameViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.numberOfMoles
+        output.numberOfMoles
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoleViewCell.reuseIdentifier, for: indexPath) as? MoleViewCell else {
-            return MoleViewCell()
-        }
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MoleViewCell.reuseIdentifier,
+                for: indexPath
+            ) as? MoleViewCell
+        else { return .init() }
         
-        presenter.configure(cell: cell, forItem: indexPath.item)
+        output.configure(cell: cell, forItem: indexPath.item)
         return cell
-    }
-}
-
-extension GameViewDataSource: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.didTapOnMole(at: indexPath.item)
     }
 }

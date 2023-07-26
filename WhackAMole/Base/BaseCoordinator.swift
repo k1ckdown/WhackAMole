@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class BaseCoordinator: Coordinator {
-    var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
+    private(set) var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

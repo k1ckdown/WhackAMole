@@ -8,17 +8,21 @@
 import Foundation
 
 final class StartPresenter {
-    private weak var view: StartView?
+    private weak var view: StartViewInput?
     private weak var coordinator: StartCoordinatorProtocol?
     
-    init(view: StartView, coordinator: StartCoordinatorProtocol) {
+    init(view: StartViewInput, coordinator: StartCoordinatorProtocol) {
         self.view = view
         self.coordinator = coordinator
     }
 }
 
-extension StartPresenter: StartViewPresenter {
-    func didGoToGameScreen() {
+// MARK: - StartViewOutput
+
+extension StartPresenter: StartViewOutput {
+    
+    func didTapOnStartButton() {
         coordinator?.showGameScene()
     }
+    
 }

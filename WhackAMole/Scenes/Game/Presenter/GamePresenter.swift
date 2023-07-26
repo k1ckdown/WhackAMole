@@ -16,7 +16,7 @@ final class GamePresenter {
     let gameProgress: Progress
     private(set) var playAgainTitle = LocalizedStrings.playAgainTitle()
     
-    private weak var view: GameView?
+    private weak var view: GameViewInput?
     
     private var moles: [Mole]
     private let game: Game
@@ -28,7 +28,7 @@ final class GamePresenter {
     private let endTimeTitle = LocalizedStrings.timeIsUp()
     private let winningTitle = LocalizedStrings.topScorer()
     
-    init(view: GameView) {
+    init(view: GameViewInput) {
         self.view = view
         
         game = .init()
@@ -41,6 +41,45 @@ final class GamePresenter {
     }
     
 }
+
+// MARK: - GameViewOutput
+
+extension GamePresenter: GameViewOutput {
+    
+    func viewWillAppear() {
+        startGame()
+    }
+    
+    func didTapOnPlayAgain() {
+        playAgain()
+    }
+    
+    func configure(cell: MoleView, forItem item: Int) {
+        cell.updateImageView(to: moles[item].state.description)
+    }
+    
+    func didTapOnMole(at item: Int) {
+        switch (moles[item].state) {
+        case .appearing(type: let type):
+            moles[item].hitCount += 1
+            
+            if (moles[item].hitCount == game.hitsToKillCount) {
+                hurtMole(item: item, stateType: type)
+            } else {
+                hitMole(item: item)
+            }
+            
+            DispatchQueue.global().async { [weak self] in
+                self?.audioPlayer?.play()
+            }
+            
+        default: return
+        }
+    }
+    
+}
+
+// MARK: - Private methods
 
 private extension GamePresenter {
     
@@ -83,7 +122,7 @@ private extension GamePresenter {
         gameTimer?.invalidate()
         isEndGame = true
         
-        view?.displayResultView()
+        view?.showResultView()
         view?.updateResultTitle(game.isMaxScore ? winningTitle : endTimeTitle)
         view?.updateResultScoreTitle("\(LocalizedStrings.yourScore()): \(game.score)")
     }
@@ -154,41 +193,6 @@ private extension GamePresenter {
         
         Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
             self.applyMoleDisappearingState(at: indexMole)
-        }
-    }
-    
-}
-
-extension GamePresenter: GameViewPresenter {
-    
-    func viewWillAppear() {
-        startGame()
-    }
-    
-    func configure(cell: MoleView, forItem item: Int) {
-        cell.updateImageView(to: moles[item].state.description)
-    }
-    
-    func didTapOnPlayAgain() {
-        playAgain()
-    }
-    
-    func didTapOnMole(at item: Int) {
-        switch (moles[item].state) {
-        case .appearing(type: let type):
-            moles[item].hitCount += 1
-            
-            if (moles[item].hitCount == game.hitsToKillCount) {
-                hurtMole(item: item, stateType: type)
-            } else {
-                hitMole(item: item)
-            }
-            
-            DispatchQueue.global().async { [weak self] in
-                self?.audioPlayer?.play()
-            }
-            
-        default: return
         }
     }
     

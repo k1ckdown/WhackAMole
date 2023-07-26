@@ -16,7 +16,7 @@ final class StartCoordinator: BaseCoordinator {
     override func start() {
         let startViewController = StartViewController()
         let startPresenter = StartPresenter(view: startViewController, coordinator: self)
-        startViewController.presenter = startPresenter
+        startViewController.output = startPresenter
         
         navigationController.setViewControllers([startViewController], animated: false)
     }

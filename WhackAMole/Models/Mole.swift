@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Mole {
+final class Mole {
     var hitCount: Int
     var state: MoleState
     

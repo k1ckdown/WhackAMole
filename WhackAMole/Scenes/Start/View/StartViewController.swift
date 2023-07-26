@@ -10,28 +10,7 @@ import SnapKit
 
 final class StartViewController: BaseViewController {
     
-    var presenter: StartViewPresenter?
-    
-    private enum Constants {
-        
-            enum HeaderImageView {
-                static let insetTop: CGFloat = 50
-                static let multiplierWidth: CGFloat = 0.5
-            }
-        
-            enum MoleImageView {
-                static let size: CGFloat = 120
-                static let insetTop: CGFloat = 90
-            }
-            
-            enum StartButton {
-                static let insetTop: CGFloat = 90
-                static let size: CGFloat = 95
-                static let borderWidth: CGFloat = 4
-                static let cornerRadius: CGFloat = size / 2
-            }
-        
-    }
+    var output: StartViewOutput?
     
     private let headerImageView = UIImageView()
     private let moleImageView = UIImageView()
@@ -44,8 +23,8 @@ final class StartViewController: BaseViewController {
     }
     
     @objc
-    private func startButtonHandle() {
-        presenter?.didGoToGameScreen()
+    private func handleStartButton() {
+        output?.didTapOnStartButton()
     }
     
     private func setup() {
@@ -96,7 +75,7 @@ final class StartViewController: BaseViewController {
         startButton.layer.cornerRadius = Constants.StartButton.cornerRadius
         startButton.layer.borderWidth = Constants.StartButton.borderWidth
         startButton.layer.borderColor = UIColor.appWhite?.cgColor
-        startButton.addTarget(self, action: #selector(startButtonHandle), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(handleStartButton), for: .touchUpInside)
         
         startButton.snp.makeConstraints { make in
             make.top.equalTo(moleImageView.snp.bottom).offset(Constants.StartButton.insetTop)
@@ -106,6 +85,33 @@ final class StartViewController: BaseViewController {
     }
 }
 
-extension StartViewController: StartView {
+// MARK: - StartViewInput
+
+extension StartViewController: StartViewInput {
+    
+}
+
+private extension StartViewController {
+    
+    enum Constants {
+        
+            enum HeaderImageView {
+                static let insetTop: CGFloat = 50
+                static let multiplierWidth: CGFloat = 0.5
+            }
+        
+            enum MoleImageView {
+                static let size: CGFloat = 120
+                static let insetTop: CGFloat = 90
+            }
+            
+            enum StartButton {
+                static let insetTop: CGFloat = 90
+                static let size: CGFloat = 95
+                static let borderWidth: CGFloat = 4
+                static let cornerRadius: CGFloat = size / 2
+            }
+        
+    }
     
 }
