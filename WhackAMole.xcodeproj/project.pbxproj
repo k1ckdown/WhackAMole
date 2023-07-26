@@ -68,6 +68,10 @@
 		49DD0A0C2A7134C70006C9F7 /* StartViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewOutput.swift; sourceTree = "<group>"; };
 		49DD0A102A7135080006C9F7 /* GameViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewInput.swift; sourceTree = "<group>"; };
 		49DD0A122A71351C0006C9F7 /* GameViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewOutput.swift; sourceTree = "<group>"; };
+		49DD0A192A713D3D0006C9F7 /* demo-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demo-start.png"; sourceTree = "<group>"; };
+		49DD0A1A2A713D3D0006C9F7 /* demo-play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demo-play.png"; sourceTree = "<group>"; };
+		49DD0A1B2A713D3D0006C9F7 /* demo-end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demo-end.png"; sourceTree = "<group>"; };
+		49DD0A1C2A713DB70006C9F7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		49E1AB2E29F55B1D0057CCE0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		49E1AB3029F55B8D0057CCE0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		49E1AB3229F59AF30057CCE0 /* StartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoordinator.swift; sourceTree = "<group>"; };
@@ -234,6 +238,16 @@
 			path = DataSources;
 			sourceTree = "<group>";
 		};
+		49DD0A182A713D2C0006C9F7 /* IMG */ = {
+			isa = PBXGroup;
+			children = (
+				49DD0A192A713D3D0006C9F7 /* demo-start.png */,
+				49DD0A1A2A713D3D0006C9F7 /* demo-play.png */,
+				49DD0A1B2A713D3D0006C9F7 /* demo-end.png */,
+			);
+			path = IMG;
+			sourceTree = "<group>";
+		};
 		49E1AB2D29F55A880057CCE0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +281,8 @@
 		49EBAB9B29F5268C0028C802 = {
 			isa = PBXGroup;
 			children = (
+				49DD0A1C2A713DB70006C9F7 /* README.md */,
+				49DD0A182A713D2C0006C9F7 /* IMG */,
 				49EBABA629F5268C0028C802 /* WhackAMole */,
 				49EBABA529F5268C0028C802 /* Products */,
 			);
